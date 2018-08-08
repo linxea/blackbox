@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0 user-scalable=no">
+  <title>Blackbox game</title>
+  <style>
+    .level {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 4em;
+      font-family: sans-serif;
+      margin-bottom: 0;
+    }
+
+    h3 {
+      font-family: sans-serif;
+    }
+
+    #timer {
+      font-size: 4em;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="level">
+    <h1>COMING SOON</h1>
+    <h3>LEVEL 2</h3>
+    <div id="timer"></div>
+  </div>
+  <script>
+    const countDownDate = new Date("Aug 10, 2018 00:00:00").getTime();
+    const timer = setInterval(function () {
+
+      const difference = countDownDate - Date.now();
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      const minutesString = minutes >= 10 ? minutes : "0" + minutes;
+      const secondString = seconds >= 10 ? seconds : "0" + seconds;
+      document.getElementById('timer').innerHTML = hours + ":" + minutesString + ":" + secondString;
+
+      if (difference < 0) {
+        clearInterval(timer);
+        document.getElementById('timer').innerHTML = '...';
+      }
+    }, 1000);
+
+  </script>
+</body>
+
+</html>
