@@ -6,56 +6,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0 user-scalable=no">
   <title>Blackbox game</title>
   <style>
+    body {
+      margin: 0;
+    }
+
     .level {
       display: flex;
       justify-content: center;
-      align-items: center;
-      text-align: center;
       flex-direction: column;
+      align-items: center;
       height: 100vh;
     }
 
+    #hidden {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 50px;
+      width: 200px;
+      font-size: 1.5rem;
+      opacity: 0;
+    }
+
+    #hidden a {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+
+    #hidden:hover {
+      opacity: 1;
+    }
+
     h1 {
-      font-size: 4em;
-      font-family: sans-serif;
-      margin-bottom: 0;
-    }
-
-    h3 {
+      font-size: 5rem;
       font-family: sans-serif;
     }
 
-    #timer {
-      font-size: 4em;
-      font-family: monospace;
+    input#password {
+      display: block;
+      font-size: 2rem;
+      height: 40px;
+      width: 300px;
+      padding: 10px;
+    }
+
+    .button {
+      font-size: 2rem;
+      height: 60px;
+      width: 100%;
+      margin-top: 20px;
     }
   </style>
 </head>
 
 <body>
   <div class="level">
-    <h1>COMING SOON</h1>
-    <h3>LEVEL 2</h3>
-    <div id="timer">00:00:00</div>
+    <h1>LEVEL 2</h1>
+    <div>
+      <input type="text" id="password" placeholder="Enter password">
+      <button class="button" onclick="submitPassword()">Submit</button>
+    </div>
   </div>
   <script>
-    const countDownDate = new Date("Aug 10, 2018 00:00:00").getTime();
-    const timer = setInterval(function () {
-
-      const difference = countDownDate - Date.now();
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-      const minutesString = minutes >= 10 ? minutes : "0" + minutes;
-      const secondString = seconds >= 10 ? seconds : "0" + seconds;
-      document.getElementById('timer').innerHTML = hours + ":" + minutesString + ":" + secondString;
-
-      if (difference < 0) {
-        clearInterval(timer);
-        document.getElementById('timer').innerHTML = '...';
+    function submitPassword() {
+      const password = document.getElementById('password').value;
+      if (password === 'password' || password === 'again') {
+        window.location.href = '../level3/random.html';
+      } else {
+        document.getElementById('password').value = 'Try again';
       }
-    }, 1000);
+    }
   </script>
 </body>
 
