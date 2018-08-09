@@ -70,11 +70,14 @@
   </div>
   <script>
     function submitPassword() {
-      const password = document.getElementById('password').value;
+      const passworldElement = document.getElementById('password');
+      const password = passworldElement.value;
+
       if (password === 'password' || password === 'again') {
         window.location.href = '../level3/random.html';
       } else {
-        document.getElementById('password').placeholder = 'Try again';
+        passworldElement.value = '';
+        passworldElement.placeholder = 'Try again';
       }
     }
   </script>
