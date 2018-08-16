@@ -37,30 +37,14 @@
 </head>
 
 <body>
-  <div class="level">
-    <h1>COMING SOON</h1>
-    <h3>LEVEL 3</h3>
-    <div id="timer">00:00:00</div>
-  </div>
-  <script>
-    const countDownDate = new Date("Aug 11, 2018 00:00:00").getTime();
-    const timer = setInterval(function () {
-
-      const difference = countDownDate - Date.now();
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-      const minutesString = minutes >= 10 ? minutes : "0" + minutes;
-      const secondString = seconds >= 10 ? seconds : "0" + seconds;
-      document.getElementById('timer').innerHTML = hours + ":" + minutesString + ":" + secondString;
-
-      if (difference < 0) {
-        clearInterval(timer);
-        document.getElementById('timer').innerHTML = '...';
-      }
-    }, 1000);
-  </script>
 </body>
+<script>
+  (function checkQuery() {
+    if (window.location.search === '?nextLevel=4') {
+      // I know, it's lame the answer is right here. ^^
+      window.location = '/level4/uuid.html'
+    }
+  })()
+</script>
 
 </html>

@@ -62,7 +62,7 @@
 
 <body>
   <div class="level">
-    <h1>LEVEL 2</h1>
+    <h1>LEVEL 3</h1>
     <div>
       <input type="text" id="password" placeholder="Enter password">
       <button class="button" onclick="submitPassword()">Submit</button>
@@ -74,7 +74,7 @@
       const password = passworldElement.value;
 
       if (password === 'password' || password === 'again') {
-        window.location.href = '../level3/random.html';
+        window.location.href = '../level3/random.html?nextLevel=what';
       } else {
         passworldElement.value = '';
         passworldElement.placeholder = 'Try again';

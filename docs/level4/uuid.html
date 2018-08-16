@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0 user-scalable=no">
+  <title>Blackbox game</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .level {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 4em;
+      font-family: sans-serif;
+      margin-bottom: 0;
+    }
+
+    h3 {
+      font-family: sans-serif;
+    }
+
+    #timer {
+      font-size: 4em;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="level">
+    <h1>LEVEL 4</h1>
+    <h2 id="timer">00:00:00</h2>
+  </div>
+  <script>
+    // This time I use UTC so different timezone get an accurate countdown
+    // Date.UTC(year,month,day,hour,min,second)
+    // -> month is 0 - 11, wth, then why day is not 0 - 30 (just a nag)
+    const releaseDate = new Date(Date.UTC(2018, 7, 19, 16, 0, 0));
+
+    const PER_SECOND = 1000;
+    const timer = setInterval(function () {
+      const difference = releaseDate - Date.now();
+      const days = Math.floor((difference / (1000 * 60 * 60 * 24)));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      const minutesString = minutes >= 10 ? minutes : "0" + minutes;
+      const secondString = seconds >= 10 ? seconds : "0" + seconds;
+      const dayString = days > 1 ? days + " days" : days + " day";
+
+      document.getElementById('timer').innerHTML = days > 0 ? dayString : hours + ":" + minutesString + ":" + secondString;
+
+      if (difference < 0) {
+        clearInterval(timer);
+        document.getElementById('timer').innerHTML = '...';
+      }
+
+    }, PER_SECOND);
+  </script>
+</body>
+
+</html>
