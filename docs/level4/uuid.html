@@ -39,16 +39,16 @@
 <body>
   <div class="level">
     <h1>LEVEL 4</h1>
-    <h2 id="timer">00:00:00</h2>
+    <h2 id="timer"></h2>
   </div>
   <script>
     // This time I use UTC so different timezone get an accurate countdown
     // Date.UTC(year,month,day,hour,min,second)
     // -> month is 0 - 11, wth, then why day is not 0 - 30 (just a nag)
     const releaseDate = new Date(Date.UTC(2018, 7, 19, 16, 0, 0));
-
     const PER_SECOND = 1000;
-    const timer = setInterval(function () {
+
+    function updateTime() {
       const difference = releaseDate - Date.now();
       const days = Math.floor((difference / (1000 * 60 * 60 * 24)));
       const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -65,8 +65,12 @@
         clearInterval(timer);
         document.getElementById('timer').innerHTML = '...';
       }
+    }
 
-    }, PER_SECOND);
+    // call for the first second, is it hacky? ^^
+    updateTime();
+
+    const timer = setInterval(updateTime(), PER_SECOND);
   </script>
 </body>
 
