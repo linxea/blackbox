@@ -8,6 +8,7 @@
   <style>
     body {
       margin: 0;
+      background-color: black;
     }
 
     .level {
@@ -23,54 +24,40 @@
       font-size: 4em;
       font-family: sans-serif;
       margin-bottom: 0;
+      color: white;
     }
 
-    h3 {
-      font-family: sans-serif;
-    }
-
-    #timer {
-      font-size: 4em;
-      font-family: monospace;
+    #nextLevelLink {
+      display:none;
+      text-decoration: none;
+      color: black;
     }
   </style>
 </head>
 
 <body>
-  <div class="level">
+  <div id="container" class="level">
     <h1>LEVEL 4</h1>
-    <h2 id="timer"></h2>
+    <a id="nextLevelLink" href="../level5/asdfghjkl.html">Well done. Go to next level.</a>
   </div>
   <script>
-    // This time I use UTC so different timezone get an accurate countdown
-    // Date.UTC(year,month,day,hour,min,second)
-    // -> month is 0 - 11, wth, then why day is not 0 - 30 (just a nag)
-    const releaseDate = new Date(Date.UTC(2018, 7, 21, 16, 0, 0));
-    const PER_SECOND = 1000;
+    const container = document.getElementById("container");
+    const nextLevelLink = document.getElementById("nextLevelLink");
+    function handleDeviceOrientation(event) {
+      const x = event.beta;
 
-    function updateTime() {
-      const difference = releaseDate - Date.now();
-      const days = Math.floor((difference / (1000 * 60 * 60 * 24)));
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-      const minutesString = minutes >= 10 ? minutes : "0" + minutes;
-      const secondString = seconds >= 10 ? seconds : "0" + seconds;
-      const dayString = days > 1 ? days + " days" : days + " day";
-
-      document.getElementById('timer').innerHTML = days > 0 ? dayString : hours + ":" + minutesString + ":" + secondString;
-
-      if (difference < 0) {
-        clearInterval(timer);
-        document.getElementById('timer').innerHTML = '...';
+      if (x === 180) {
+          showNextLevelLink();
       }
     }
 
-    // call for the first second, is it hacky? ^^
-    updateTime();
+    function showNextLevelLink(){
+      const body = document.getElementsByTagName('body')[0];
+      body.style.backgroundColor = "white";
+      nextLevelLink.style.display = "block";
+    }
 
-    const timer = setInterval(updateTime(), PER_SECOND);
+    window.addEventListener("deviceorientation", handleDeviceOrientation, true);
   </script>
 </body>
 
