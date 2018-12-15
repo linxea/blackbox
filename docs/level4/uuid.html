@@ -46,7 +46,7 @@
     function handleDeviceOrientation(event) {
       const x = event.beta;
 
-      if (x === 180) {
+      if (x >= 150 || x <= -150) {
           showNextLevelLink();
       }
     }
